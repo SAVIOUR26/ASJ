@@ -67,6 +67,7 @@
 
     <div class="container site-footer__bottom">
         <p>&copy; <?= date('Y') ?> <?= htmlspecialchars($site['name']) ?>. All rights reserved.</p>
+        <p class="site-footer__legal"><a href="privacy.php">Privacy Policy</a> · <a href="terms.php">Terms of Use</a></p>
         <p class="site-footer__credit">Kampala, Uganda</p>
     </div>
 </footer>

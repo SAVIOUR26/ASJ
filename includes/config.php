@@ -13,6 +13,10 @@ $site = [
     'whatsapp'    => '256700000000',           // TODO: replace with live WhatsApp number
     'email'       => 'info@asjeyehospital.com', // TODO: replace with live email
     'address'     => '14 Kyadondo Road, Kampala, Uganda',
+    // Structured form of the address above, used for schema.org markup.
+    'address_street'  => '14 Kyadondo Road',
+    'address_city'    => 'Kampala',
+    'address_country' => 'UG',
     'hours'       => 'Mon – Sat: 8:00am – 6:00pm',
     'emergency'   => 'Emergency eye care available on call',
     'map_query'   => '14+Kyadondo+Road+Kampala+Uganda',

@@ -1,0 +1,32 @@
+<?php
+/**
+ * Dynamic sitemap.xml — served at /sitemap.xml via the rewrite rule in
+ * .htaccess. Lists every public page with its on-disk last-modified time,
+ * so it never drifts out of sync with what's actually on the site.
+ */
+header('Content-Type: application/xml; charset=UTF-8');
+
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$origin = $scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost');
+
+$pages = [
+    ['path' => 'index.php',    'priority' => '1.0'],
+    ['path' => 'about.php',    'priority' => '0.8'],
+    ['path' => 'services.php', 'priority' => '0.9'],
+    ['path' => 'doctors.php',  'priority' => '0.7'],
+    ['path' => 'contact.php',  'priority' => '0.8'],
+    ['path' => 'privacy.php',  'priority' => '0.3'],
+    ['path' => 'terms.php',    'priority' => '0.3'],
+];
+
+echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?php foreach ($pages as $page): ?>
+    <url>
+        <loc><?= htmlspecialchars($origin . '/' . $page['path']) ?></loc>
+        <lastmod><?= date('Y-m-d', filemtime(__DIR__ . '/' . $page['path'])) ?></lastmod>
+        <priority><?= $page['priority'] ?></priority>
+    </url>
+<?php endforeach; ?>
+</urlset>

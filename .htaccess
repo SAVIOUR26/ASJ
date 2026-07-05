@@ -1,0 +1,29 @@
+# ASJ Eye Hospital — Apache configuration
+# (Nginx equivalents are documented in README.md under Deployment, since
+# an .htaccess file has no effect on an Nginx/PHP-FPM host.)
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Serve the dynamic robots.txt / sitemap.xml from their .php sources.
+    RewriteRule ^robots\.txt$ robots.php [L]
+    RewriteRule ^sitemap\.xml$ sitemap.php [L]
+</IfModule>
+
+# Custom 404 page instead of the server default.
+ErrorDocument 404 /404.php
+
+<IfModule mod_headers.c>
+    # HSTS — only takes effect once the site is actually served over HTTPS.
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+
+    # Content-Security-Policy: allows the CDN/webfont hosts this site
+    # already relies on (Font Awesome via cdnjs, Google Fonts) plus Google
+    # Maps (contact page embed) and, once filled in, Google Analytics.
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src https://www.google.com; connect-src 'self' https://www.google-analytics.com"
+</IfModule>
