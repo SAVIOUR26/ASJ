@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/lang.php';
 $page_title = isset($page_title) ? $page_title . ' — ' . $site['name'] : $site['name'] . ' — ' . $site['tagline'];
 $page_desc  = isset($page_desc) ? $page_desc : 'ASJ Eye Hospital in Kampala offers comprehensive eye care — cataract, LASIK, glaucoma, retina and pediatric ophthalmology — from experienced specialists using modern diagnostic technology.';
 $page_image = isset($page_image) ? $page_image : 'assets/img/photo-eye-macro.jpg';
@@ -14,7 +15,7 @@ $page_image_url = str_starts_with($page_image, 'http') ? $page_image : $origin .
 $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !== '#');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= htmlspecialchars($locale) ?>">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,9 +90,19 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
             <a href="tel:<?= htmlspecialchars($site['phone_href']) ?>"><i class="fa-solid fa-phone" aria-hidden="true"></i> <?= htmlspecialchars($site['phone']) ?></a>
             <span class="topbar__divider" aria-hidden="true">|</span>
             <span><i class="fa-regular fa-clock" aria-hidden="true"></i> <?= htmlspecialchars($site['hours']) ?></span>
+            <span class="topbar__divider" aria-hidden="true">|</span>
+            <span class="lang-switch">
+                <a href="?lang=en" class="<?= $locale === 'en' ? 'is-active' : '' ?>" aria-current="<?= $locale === 'en' ? 'true' : 'false' ?>">EN</a>
+                <span aria-hidden="true">/</span>
+                <a href="?lang=lg" class="<?= $locale === 'lg' ? 'is-active' : '' ?>" aria-current="<?= $locale === 'lg' ? 'true' : 'false' ?>">LG</a>
+            </span>
         </div>
     </div>
 </div>
+
+<?php if ($locale === 'lg'): ?>
+<div class="lang-pending-notice"><i class="fa-solid fa-language" aria-hidden="true"></i> <?= htmlspecialchars(t('lang_pending_notice')) ?></div>
+<?php endif; ?>
 
 <header class="site-header" id="site-header">
     <div class="container site-header__inner">
@@ -108,7 +119,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
                 <?php foreach ($nav as $item): ?>
                 <li>
                     <a href="<?= htmlspecialchars($item['href']) ?>" class="<?= $current === $item['match'] ? 'is-active' : '' ?>">
-                        <?= htmlspecialchars($item['label']) ?>
+                        <?= htmlspecialchars(t('nav_' . $item['match'])) ?>
                     </a>
                 </li>
                 <?php endforeach; ?>
@@ -117,7 +128,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
 
         <div class="site-header__actions">
             <a href="/contact#book" class="btn btn--primary">
-                <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Book Appointment
+                <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> <?= htmlspecialchars(t('book_appointment')) ?>
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
                 <span></span><span></span><span></span>

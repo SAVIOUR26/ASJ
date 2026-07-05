@@ -26,7 +26,7 @@ jobs:
             sleep 0.5
           done
 
-          pages="index about services doctors contact privacy terms 404 500 maintenance"
+          pages="index about services doctors blog contact privacy terms 404 500 maintenance"
           fail=0
           for page in $pages; do
             code=$(curl -s -o /tmp/body.html -w '%{http_code}' "http://localhost:8000/${page}.php")
@@ -51,6 +51,19 @@ jobs:
               fail=1
             fi
           done
+
+          # blog-post.php takes ?slug= in production via the .htaccess
+          # rewrite rather than a clean filename, so check it directly.
+          code=$(curl -s -o /tmp/body.html -w '%{http_code}' "http://localhost:8000/blog-post.php?slug=understanding-cataracts")
+          if [ "$code" -ge 400 ]; then
+            echo "::error::blog-post.php?slug=understanding-cataracts returned HTTP $code"
+            fail=1
+          fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:8000/blog-post.php?slug=does-not-exist")
+          if [ "$code" -ne 404 ]; then
+            echo "::error::blog-post.php with an unknown slug should 404, got HTTP $code"
+            fail=1
+          fi
 
           cat /tmp/php-server.log
           exit $fail

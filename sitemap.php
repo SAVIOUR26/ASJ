@@ -15,10 +15,20 @@ $pages = [
     ['file' => 'about.php',    'path' => 'about',    'priority' => '0.8'],
     ['file' => 'services.php', 'path' => 'services', 'priority' => '0.9'],
     ['file' => 'doctors.php',  'path' => 'doctors',  'priority' => '0.7'],
+    ['file' => 'blog.php',     'path' => 'blog',     'priority' => '0.6'],
     ['file' => 'contact.php',  'path' => 'contact',  'priority' => '0.8'],
     ['file' => 'privacy.php',  'path' => 'privacy',  'priority' => '0.3'],
     ['file' => 'terms.php',    'path' => 'terms',    'priority' => '0.3'],
 ];
+
+require_once __DIR__ . '/includes/blog-data.php';
+foreach ($blog_posts as $post) {
+    $pages[] = [
+        'file'     => 'includes/blog-data.php',
+        'path'     => 'blog/' . $post['slug'],
+        'priority' => '0.5',
+    ];
+}
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>

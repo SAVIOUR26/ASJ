@@ -39,8 +39,9 @@ class SmtpMailer
      * @param string $subject
      * @param string $body     Plain-text body
      * @param string|null $replyTo
+     * @param array<int,array{filename:string,mime:string,content:string}> $attachments
      */
-    public function send(string $from, string $fromName, string $to, string $subject, string $body, ?string $replyTo = null): void
+    public function send(string $from, string $fromName, string $to, string $subject, string $body, ?string $replyTo = null, array $attachments = []): void
     {
         $transport = $this->encryption === 'ssl' ? 'ssl://' : '';
         $this->socket = @stream_socket_client(
@@ -84,10 +85,29 @@ class SmtpMailer
                 $headers[] = "Reply-To: <{$replyTo}>";
             }
             $headers[] = "MIME-Version: 1.0";
-            $headers[] = "Content-Type: text/plain; charset=UTF-8";
             $headers[] = "Date: " . date('r');
 
-            $data = implode("\r\n", $headers) . "\r\n\r\n" . $this->stuff($body) . "\r\n.";
+            if (empty($attachments)) {
+                $headers[] = "Content-Type: text/plain; charset=UTF-8";
+                $message = $body;
+            } else {
+                $boundary = 'asj-' . bin2hex(random_bytes(12));
+                $headers[] = "Content-Type: multipart/mixed; boundary=\"{$boundary}\"";
+
+                $parts = "--{$boundary}\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n{$body}\r\n";
+                foreach ($attachments as $attachment) {
+                    $parts .= "--{$boundary}\r\n"
+                        . "Content-Type: {$attachment['mime']}; name=\"{$attachment['filename']}\"\r\n"
+                        . "Content-Transfer-Encoding: base64\r\n"
+                        . "Content-Disposition: attachment; filename=\"{$attachment['filename']}\"\r\n\r\n"
+                        . chunk_split(base64_encode($attachment['content']))
+                        . "\r\n";
+                }
+                $parts .= "--{$boundary}--";
+                $message = $parts;
+            }
+
+            $data = implode("\r\n", $headers) . "\r\n\r\n" . $this->stuff($message) . "\r\n.";
             $this->command($data, 250);
 
             $this->command("QUIT", 221);
@@ -139,9 +159,10 @@ class SmtpMailer
  * when no SMTP host is set (e.g. local preview, or before the client's
  * Mailcow credentials have been filled in).
  *
+ * @param array<int,array{filename:string,mime:string,content:string}> $attachments
  * @return bool True on success.
  */
-function send_site_mail(array $site, string $to, string $subject, string $body, ?string $replyTo = null): bool
+function send_site_mail(array $site, string $to, string $subject, string $body, ?string $replyTo = null, array $attachments = []): bool
 {
     $smtp = $site['smtp'] ?? [];
     $host = $smtp['host'] ?? '';
@@ -152,7 +173,25 @@ function send_site_mail(array $site, string $to, string $subject, string $body, 
         if ($replyTo !== null && $replyTo !== '') {
             $headers .= "Reply-To: {$replyTo}\r\n";
         }
-        return @mail($to, $subject, $body, $headers);
+
+        if (empty($attachments)) {
+            $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+            return @mail($to, $subject, $body, $headers);
+        }
+
+        $boundary = 'asj-' . bin2hex(random_bytes(12));
+        $headers .= "MIME-Version: 1.0\r\nContent-Type: multipart/mixed; boundary=\"{$boundary}\"\r\n";
+        $message = "--{$boundary}\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n{$body}\r\n";
+        foreach ($attachments as $attachment) {
+            $message .= "--{$boundary}\r\n"
+                . "Content-Type: {$attachment['mime']}; name=\"{$attachment['filename']}\"\r\n"
+                . "Content-Transfer-Encoding: base64\r\n"
+                . "Content-Disposition: attachment; filename=\"{$attachment['filename']}\"\r\n\r\n"
+                . chunk_split(base64_encode($attachment['content']))
+                . "\r\n";
+        }
+        $message .= "--{$boundary}--";
+        return @mail($to, $subject, $message, $headers);
     }
 
     try {
@@ -164,7 +203,7 @@ function send_site_mail(array $site, string $to, string $subject, string $body, 
             $smtp['password'] ?? '',
         );
         $fromAddress = $smtp['from'] !== '' ? $smtp['from'] : $site['email'];
-        $mailer->send($fromAddress, $site['name'] . ' Website', $to, $subject, $body, $replyTo);
+        $mailer->send($fromAddress, $site['name'] . ' Website', $to, $subject, $body, $replyTo, $attachments);
         return true;
     } catch (SmtpException $e) {
         error_log('[ASJ mailer] ' . $e->getMessage());

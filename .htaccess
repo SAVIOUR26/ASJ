@@ -11,10 +11,13 @@ DirectoryIndex index.php
     RewriteRule ^robots\.txt$ robots.php [L]
     RewriteRule ^sitemap\.xml$ sitemap.php [L]
 
+    # Blog posts: /blog/some-slug -> blog-post.php?slug=some-slug
+    RewriteRule ^blog/([\w-]+)$ blog-post.php?slug=$1 [L,QSA]
+
     # Canonicalize: redirect a literal "/page.php" visit to the clean
     # "/page" URL (whitelisted by name — contact-handler.php is a POST-only
     # form target and must never be redirected, which would drop the data).
-    RewriteCond %{THE_REQUEST} \s/+(index|about|services|doctors|contact|privacy|terms)\.php[\s?] [NC]
+    RewriteCond %{THE_REQUEST} \s/+(index|about|services|doctors|contact|privacy|terms|blog)\.php[\s?] [NC]
     RewriteRule ^ /%1 [R=301,L]
 
     # Clean URLs: map "/page" internally to "/page.php" when no matching

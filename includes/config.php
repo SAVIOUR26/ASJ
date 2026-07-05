@@ -44,6 +44,18 @@ $site = [
     // a privacy-first alternative (Plausible/Fathom). Left blank, no
     // tracking script is loaded at all.
     'ga4_id' => '',
+
+    // TODO: fill in once an Africa's Talking account exists, to enable SMS
+    // appointment-request confirmations and next-day reminders — see
+    // includes/notifier.php and scripts/send-appointment-reminders.php.
+    // Left blank, SMS sending is a silent no-op.
+    'sms' => [
+        'provider'  => 'africastalking',
+        'username'  => '',
+        'api_key'   => '',
+        'sender_id' => '',
+        'sandbox'   => true,
+    ],
 ];
 
 $nav = [
@@ -51,6 +63,7 @@ $nav = [
     ['label' => 'About Us',  'href' => '/about',    'match' => 'about'],
     ['label' => 'Services',  'href' => '/services', 'match' => 'services'],
     ['label' => 'Our Team',  'href' => '/doctors',  'match' => 'doctors'],
+    ['label' => 'Insights',  'href' => '/blog',     'match' => 'blog'],
     ['label' => 'Contact',   'href' => '/contact',  'match' => 'contact'],
 ];
 
@@ -131,4 +144,8 @@ $services = [
     ],
 ];
 
-$current = basename($_SERVER['PHP_SELF'], '.php');
+// A page can set $current itself before requiring header.php (e.g.
+// blog-post.php wants the "Insights" nav item highlighted, not itself).
+if (!isset($current)) {
+    $current = basename($_SERVER['PHP_SELF'], '.php');
+}

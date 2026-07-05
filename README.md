@@ -1,8 +1,10 @@
-# ASJ Eye Hospital — Website (Stage 1)
+# ASJ Eye Hospital — Website
 
-Custom PHP website for ASJ Eye Hospital, 14 Kyadondo Road, Kampala. Built as the
-first design/build pass — ready to push to GitHub and hand off to Claude Code
-for remaining adjustments, real content, and deployment.
+Custom PHP website for ASJ Eye Hospital, 14 Kyadondo Road, Kampala. Started as
+a Stage 1 design/build pass, since carried through a full Phase 0–3 build —
+see **[ROADMAP.md](ROADMAP.md)** for exactly what's shipped versus what's
+still blocked on real client input (contact details, doctor bios, photos,
+legal sign-off, SMS/analytics credentials).
 
 ## Stack
 
@@ -10,27 +12,35 @@ for remaining adjustments, real content, and deployment.
   Thirdsan's custom-PHP client sites.
 - Font Awesome 6 (via cdnjs CDN) for iconography.
 - Google Fonts: **Fraunces** (display) + **Inter** (body/UI).
-- No build step, no dependencies to install — just PHP + a webserver.
+- No build step, no Composer/npm dependencies — just PHP (with the `gd`,
+  `pdo_sqlite` and `curl` extensions, all standard) + a webserver.
 
 ## Structure
 
 ```
 asj/
-├── index.php              Homepage
-├── about.php               Our story, approach, values
-├── services.php             Full specialities list
-├── doctors.php              Team page (placeholder profiles — see below)
-├── contact.php              Contact info + appointment form + map
-├── contact-handler.php     Server-side form handler (mail())
-├── 404.php                 Not-found page
+├── index.php, about.php, services.php, doctors.php   Core pages
+├── contact.php / contact-handler.php                 Enquiry + appointment-request form
+├── blog.php / blog-post.php                          Insights section (example posts — see ROADMAP.md)
+├── privacy.php, terms.php                             Legal pages (drafted, pending legal sign-off)
+├── 404.php, 500.php, maintenance.php                  Error / maintenance pages
+├── robots.php, sitemap.php                            Dynamic, served as /robots.txt and /sitemap.xml via .htaccess
+├── .htaccess                                           Clean URLs, security headers, error documents
 ├── includes/
-│   ├── config.php          ⚙️ Site-wide settings: phone, email, address, nav, services list
-│   ├── header.php          <head>, topbar, nav
-│   └── footer.php          CTA banner, footer, back-to-top
+│   ├── config.php      ⚙️ Site-wide settings: contact info, nav, services, SMTP, SMS, GA4 — TODOs marked
+│   ├── header.php / footer.php   Shared chrome, SEO/OG/schema.org meta
+│   ├── mailer.php       Dependency-free SMTP client (falls back to mail())
+│   ├── db.php           SQLite storage for appointment requests
+│   ├── ics.php          .ics calendar invite generation
+│   ├── notifier.php     SMS via Africa's Talking (inert without credentials)
+│   └── lang.php         EN/LG locale switch (see lang/)
+├── lang/en.php, lang/lg.php   Translation strings for shared chrome
+├── scripts/send-appointment-reminders.php   Cron-ready SMS reminder job (see ROADMAP.md)
+├── data/                SQLite database, created at runtime — gitignored
 └── assets/
-    ├── css/style.css       Full design system (tokens at the top of the file)
-    ├── js/main.js          Nav toggle, scroll reveal, FAQ accordion, back-to-top
-    └── img/                Logo, favicon set, and the 6 supplied facility photos
+    ├── css/style.css    Full design system (tokens at the top of the file)
+    ├── js/main.js       Nav toggle, scroll reveal, FAQ accordion, back-to-top
+    └── img/             Logo, favicon set, facility photos + generated .webp versions
 ```
 
 ## Design notes
@@ -48,30 +58,35 @@ asj/
   (see TODOs below) rather than filled with placeholder claims that could
   mislead a visitor.
 
-## Before going live — TODO for the client / Claude Code
+## Before going live
+
+Full punch list with status and effort estimates lives in
+**[ROADMAP.md](ROADMAP.md)**. In short, everything that was pure engineering
+work is done and tested; what's left needs real input only ASJ can provide:
 
 1. **`includes/config.php`** — replace the placeholder phone number, WhatsApp
-   number, and email address with real ones (search `TODO` in that file).
+   number, and email address with real ones (search `TODO` in that file),
+   plus real SMTP (Mailcow) and, optionally, Africa's Talking/GA4 credentials.
 2. **`doctors.php`** — swap the three placeholder specialist cards for real
    names, qualifications, photos and bios.
-3. **Contact form email** — `contact-handler.php` uses PHP's `mail()`. On most
-   shared hosting this works out of the box; on the Contabo VPS you'll likely
-   want to wire it to Mailcow via SMTP (e.g. PHPMailer) instead of relying on
-   `mail()`, since VPS mail() delivery is unreliable without a configured MTA.
-4. **Map embed** — `contact.php` uses a key-less Google Maps embed
-   (`google.com/maps?q=...&output=embed`). It couldn't render inside this
-   sandbox (no outbound access to google.com here), but it will work as soon
-   as it's on a real server with internet access. Worth a live check after
-   deploy, and swap in exact map coordinates if the address search doesn't
-   pin the right building.
-5. **Real facility/service photos** — only 6 unique photos were supplied (2
+3. **Map embed** — `contact.php` uses a key-less Google Maps embed. It
+   couldn't render inside this sandbox (no outbound access to google.com
+   here); worth a live check once deployed, and swap in exact coordinates if
+   the address search doesn't pin the right building.
+4. **Real facility/service photos** — only 6 unique photos were supplied (2
    were exact duplicates and were skipped). More photos (exterior signage,
    OT/surgical theatre, additional consultation rooms, real staff) would let
-   the gallery and doctors page carry more of their own weight.
-6. **Legal/compliance copy** — no privacy policy or terms page included yet;
-   add if required for the region.
-7. **Analytics / SEO** — no tracking pixel or sitemap included; add per the
-   client's preference.
+   the gallery, doctors page and blog carry more of their own weight.
+5. **Legal review** — `privacy.php` and `terms.php` are drafted against
+   Uganda's Data Protection and Privacy Act 2019, but need ASJ's own legal
+   sign-off before they should be relied on.
+6. **Luganda translation** — the EN/LG toggle works, but `lang/lg.php` still
+   holds English placeholder text pending a native-speaker review (see the
+   comment at the top of that file for why it wasn't guessed at).
+7. **Cron for appointment reminders** — `scripts/send-appointment-reminders.php`
+   is ready to run daily but isn't scheduled anywhere; add it to the VPS
+   crontab once Africa's Talking credentials are in place (see the script's
+   header comment for the exact line).
 
 ## Local preview
 
@@ -82,7 +97,20 @@ Then visit `http://localhost:8000/index.php`.
 
 ## Deployment
 
-Standard PHP hosting (Apache/Nginx + PHP-FPM) — no `.htaccess` rewrite rules
-are required since every page is addressed by its real `.php` filename. If
-clean URLs are wanted later (e.g. `/services` instead of `/services.php`),
-that's a small addition once this is on the VPS.
+Standard PHP hosting (Apache/Nginx + PHP-FPM). On **Apache**, `.htaccess`
+already handles clean URLs (`/services` instead of `/services.php`), security
+headers, and the custom error pages — just make sure `AllowOverride All` (or
+at least `FileInfo`+`Indexes`) is set for this directory, and that
+`mod_rewrite`/`mod_headers` are enabled. On **Nginx**, `.htaccess` has no
+effect — the rewrite rules and headers in it need to be translated into the
+server block by hand; the file is commented well enough to do that directly
+from it.
+
+A few things also need doing once on the real server, outside this repo:
+
+- Enable `pdo_sqlite`, `gd` and `curl` PHP extensions if not already on
+  (used by the appointment-booking store, image tooling, and SMS notifier).
+- Make sure the `data/` directory (created automatically on first booking) is
+  writable by the PHP process and *not* web-accessible.
+- Add the cron line from `scripts/send-appointment-reminders.php`'s header
+  comment once SMS is configured.

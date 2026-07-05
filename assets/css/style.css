@@ -121,6 +121,15 @@ p { color: var(--text-soft); }
 .topbar__item--right { display: flex; align-items: center; gap: 14px; }
 .topbar a:hover { color: var(--gold); }
 .topbar__divider { opacity: 0.35; }
+.lang-switch { display: inline-flex; align-items: center; gap: 5px; }
+.lang-switch a { opacity: 0.6; font-weight: 600; }
+.lang-switch a.is-active { opacity: 1; color: var(--gold); }
+.lang-switch span[aria-hidden] { opacity: 0.35; }
+
+.lang-pending-notice {
+    background: var(--sky-light); color: var(--ink); text-align: center;
+    font-size: 0.82rem; font-weight: 600; padding: 8px 16px;
+}
 
 /* ---------- Header / Nav ---------- */
 .site-header {
@@ -384,6 +393,7 @@ p { color: var(--text-soft); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-grid .full { grid-column: 1 / -1; }
 .field label { display: block; font-weight: 700; font-size: 0.88rem; color: var(--ink); margin-bottom: 8px; }
+.field-optional { font-weight: 500; color: var(--text-soft); text-transform: none; letter-spacing: normal; }
 .field input, .field select, .field textarea {
     width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
     background: var(--mist); transition: border-color .2s ease, background .2s ease;
@@ -410,6 +420,11 @@ p { color: var(--text-soft); }
 .faq-item.is-open .faq-question i { transform: rotate(45deg); }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
 .faq-answer p { padding-bottom: 22px; margin: 0; }
+
+/* ---------- Blog post body ---------- */
+.blog-post-body p { margin-bottom: 20px; font-size: 1.02rem; }
+.blog-post-body h2 { font-size: 1.4rem; margin-top: 36px; margin-bottom: 14px; }
+.blog-post-body em { color: var(--text-soft); }
 
 /* ---------- Utilities ---------- */
 .text-center { text-align: center; }
