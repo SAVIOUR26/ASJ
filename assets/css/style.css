@@ -15,6 +15,7 @@
     --paper:      #ffffff;
     --gold:       #e3a23c;   /* warm human accent — used sparingly (focus ring, key CTA) */
     --gold-dark:  #c9862a;
+    --gold-deep:  #a66c1a;   /* focus-ring only — clears 3:1 non-text contrast on both white and mist */
 
     --text:       #1c2b3a;
     --text-soft:  #52697a;
@@ -74,14 +75,19 @@ p { color: var(--text-soft); }
 .skip-link:focus { left: 0; }
 
 :focus-visible {
-    outline: 2.5px solid var(--gold);
+    /* gold-deep, not the brand gold/gold-dark used elsewhere: those sit at
+       ~2.2–2.8:1 against white/mist sections, under the 3:1 WCAG minimum
+       for a non-text focus indicator. */
+    outline: 2.5px solid var(--gold-deep);
     outline-offset: 3px;
 }
 
 .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--font-body); font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--sky);
+    /* --primary, not --sky: at this weight/size --sky sits at ~3.2:1 on
+       white, under the 4.5:1 WCAG AA minimum for text. */
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary);
 }
 .eyebrow::before {
     content: ""; width: 7px; height: 7px; border-radius: 50%;
@@ -115,6 +121,15 @@ p { color: var(--text-soft); }
 .topbar__item--right { display: flex; align-items: center; gap: 14px; }
 .topbar a:hover { color: var(--gold); }
 .topbar__divider { opacity: 0.35; }
+.lang-switch { display: inline-flex; align-items: center; gap: 5px; }
+.lang-switch a { opacity: 0.6; font-weight: 600; }
+.lang-switch a.is-active { opacity: 1; color: var(--gold); }
+.lang-switch span[aria-hidden] { opacity: 0.35; }
+
+.lang-pending-notice {
+    background: var(--sky-light); color: var(--ink); text-align: center;
+    font-size: 0.82rem; font-weight: 600; padding: 8px 16px;
+}
 
 /* ---------- Header / Nav ---------- */
 .site-header {
@@ -130,7 +145,7 @@ p { color: var(--text-soft); }
 .brand__text { display: flex; flex-direction: column; line-height: 1.2; }
 .brand__name { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink); }
 .brand__name em { font-style: normal; color: var(--primary); }
-.brand__tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky); font-weight: 600; }
+.brand__tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
 
 .nav__list { display: flex; align-items: center; gap: 6px; }
 .nav__list a {
@@ -293,7 +308,7 @@ p { color: var(--text-soft); }
 .doctor-card__photo img { width: 100%; height: 100%; object-fit: cover; }
 .doctor-card__body { padding: 22px 22px 26px; }
 .doctor-card__body h3 { font-size: 1.1rem; margin-bottom: 4px; }
-.doctor-card__role { color: var(--sky); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; display: block; }
+.doctor-card__role { color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; display: block; }
 .doctor-card__body p { font-size: 0.9rem; margin: 0; }
 .doctor-note {
     background: var(--mist); border: 1px dashed var(--sky-light); border-radius: var(--radius-sm);
@@ -329,6 +344,7 @@ p { color: var(--text-soft); }
 }
 .social-links a:hover { background: var(--gold); color: var(--ink); }
 .site-footer__bottom { display: flex; justify-content: space-between; padding-block: 22px; font-size: 0.85rem; flex-wrap: wrap; gap: 10px; }
+.site-footer__legal a:hover { color: var(--gold); }
 
 .back-to-top {
     position: fixed; bottom: 26px; right: 26px; width: 48px; height: 48px; border-radius: 50%;
@@ -377,6 +393,7 @@ p { color: var(--text-soft); }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-grid .full { grid-column: 1 / -1; }
 .field label { display: block; font-weight: 700; font-size: 0.88rem; color: var(--ink); margin-bottom: 8px; }
+.field-optional { font-weight: 500; color: var(--text-soft); text-transform: none; letter-spacing: normal; }
 .field input, .field select, .field textarea {
     width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
     background: var(--mist); transition: border-color .2s ease, background .2s ease;
@@ -404,6 +421,11 @@ p { color: var(--text-soft); }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
 .faq-answer p { padding-bottom: 22px; margin: 0; }
 
+/* ---------- Blog post body ---------- */
+.blog-post-body p { margin-bottom: 20px; font-size: 1.02rem; }
+.blog-post-body h2 { font-size: 1.4rem; margin-top: 36px; margin-bottom: 14px; }
+.blog-post-body em { color: var(--text-soft); }
+
 /* ---------- Utilities ---------- */
 .text-center { text-align: center; }
 .mt-lg { margin-top: 40px; }
@@ -421,8 +443,10 @@ p { color: var(--text-soft); }
 @media (max-width: 880px) {
     .topbar__item:first-child { display: none; }
     .nav { position: fixed; inset: 74px 0 0 0; background: #fff; padding: 20px 24px; transform: translateX(100%);
-        transition: transform .3s ease; overflow-y: auto; z-index: 99; }
-    .nav.is-open { transform: translateX(0); }
+        visibility: hidden; transition: transform .3s ease, visibility 0s linear .3s; overflow-y: auto; z-index: 99; }
+    /* visibility (not just the transform) keeps the closed-off-canvas menu's
+       links out of tab order — otherwise they stay focusable while invisible. */
+    .nav.is-open { transform: translateX(0); visibility: visible; transition: transform .3s ease; }
     .nav__list { flex-direction: column; align-items: stretch; gap: 4px; }
     .nav__list a { padding: 14px 18px; font-size: 1.05rem; }
     .nav-toggle { display: flex; }

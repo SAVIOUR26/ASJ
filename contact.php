@@ -1,4 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $page_title = 'Contact & Book an Appointment';
 $page_desc  = 'Get in touch with ASJ Eye Hospital in Kampala or book an appointment with one of our eye specialists.';
 require_once __DIR__ . '/includes/header.php';
@@ -8,7 +15,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
 
 <section class="page-header">
     <div class="container">
-        <div class="breadcrumb"><a href="index.php">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Contact</span></div>
+        <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Contact</span></div>
         <span class="eyebrow">Get In Touch</span>
         <h1>Book an appointment or ask us a question.</h1>
         <p>Reach us by phone, WhatsApp or the form below — our team responds during opening hours.</p>
@@ -98,10 +105,29 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
                         <option value="Not sure">Not sure — general enquiry</option>
                     </select>
                 </div>
+                <div class="field">
+                    <label for="appt_date">Preferred Date <span class="field-optional">(optional)</span></label>
+                    <input type="date" id="appt_date" name="appt_date" min="<?= date('Y-m-d', strtotime('+1 day')) ?>">
+                </div>
+                <div class="field">
+                    <label for="appt_time">Preferred Time <span class="field-optional">(optional)</span></label>
+                    <select id="appt_time" name="appt_time">
+                        <option value="">Select a time</option>
+                        <?php
+                        for ($minutes = 8 * 60; $minutes <= 17 * 60 + 30; $minutes += 30) {
+                            $slot = sprintf('%02d:%02d', intdiv($minutes, 60), $minutes % 60);
+                            echo '<option value="' . htmlspecialchars($slot) . '">' . htmlspecialchars(date('g:i A', mktime(0, $minutes))) . "</option>\n";
+                        }
+                        ?>
+                    </select>
+                </div>
                 <div class="field full">
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" required placeholder="Tell us about your concern or preferred appointment time..."></textarea>
                 </div>
+                <p class="form-note full" style="margin-top:-8px;">Preferred date/time is a request, not a confirmed booking — our <?= htmlspecialchars($site['hours']) ?> team will call or email to confirm.</p>
+
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
                 <!-- Honeypot spam trap — kept hidden from real visitors -->
                 <div class="field full" style="position:absolute; left:-9999px;" aria-hidden="true">

@@ -6,7 +6,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="page-header">
     <div class="container">
-        <div class="breadcrumb"><a href="index.php">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>About Us</span></div>
+        <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>About Us</span></div>
         <span class="eyebrow">About ASJ Eye Hospital</span>
         <h1>Dedicated to one thing: your eyesight.</h1>
         <p>A specialist eye hospital on Kyadondo Road, Kampala — built for accurate diagnosis, considered treatment, and care that doesn't rush you through the door.</p>
@@ -18,7 +18,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="split__media">
             <span class="split__photo-accent split__photo-accent--tl" aria-hidden="true"></span>
             <div class="split__photo">
-                <img src="assets/img/photo-facility-1.jpg" alt="ASJ Eye Hospital reception and facility">
+                <picture><source srcset="assets/img/photo-facility-1.webp" type="image/webp"><img src="assets/img/photo-facility-1.jpg" alt="ASJ Eye Hospital reception and facility" width="800" height="533" loading="lazy" decoding="async"></picture>
             </div>
             <span class="split__photo-accent split__photo-accent--br" aria-hidden="true"></span>
         </div>
@@ -47,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="split__media">
             <span class="split__photo-accent split__photo-accent--tl" aria-hidden="true"></span>
             <div class="split__photo">
-                <img src="assets/img/photo-exam-1.jpg" alt="Detailed eye diagnostic exam at ASJ Eye Hospital">
+                <picture><source srcset="assets/img/photo-exam-1.webp" type="image/webp"><img src="assets/img/photo-exam-1.jpg" alt="Detailed eye diagnostic exam at ASJ Eye Hospital" width="800" height="533" loading="lazy" decoding="async"></picture>
             </div>
             <span class="split__photo-accent split__photo-accent--br" aria-hidden="true"></span>
         </div>
@@ -92,10 +92,10 @@ require_once __DIR__ . '/includes/header.php';
             <h2>Our facility &amp; team.</h2>
         </div>
         <div class="gallery-grid">
-            <figure class="reveal"><img src="assets/img/photo-facility-2.jpg" alt="ASJ Eye Hospital equipment"><figcaption>Diagnostic Equipment</figcaption></figure>
-            <figure class="reveal"><img src="assets/img/photo-team.jpg" alt="ASJ Eye Hospital care team"><figcaption>Our Care Team</figcaption></figure>
-            <figure class="reveal"><img src="assets/img/photo-exam-2.jpg" alt="Consultation in progress"><figcaption>Consultation Room</figcaption></figure>
-            <figure class="reveal"><img src="assets/img/photo-eye-macro.jpg" alt="Close-up of a human eye"><figcaption>Focused on Vision</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-facility-2.webp" type="image/webp"><img src="assets/img/photo-facility-2.jpg" alt="ASJ Eye Hospital equipment" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Diagnostic Equipment</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-team.webp" type="image/webp"><img src="assets/img/photo-team.jpg" alt="ASJ Eye Hospital care team" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Care Team</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-exam-2.webp" type="image/webp"><img src="assets/img/photo-exam-2.jpg" alt="Consultation in progress" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Consultation Room</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-eye-macro.webp" type="image/webp"><img src="assets/img/photo-eye-macro.jpg" alt="Close-up of a human eye" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Focused on Vision</figcaption></figure>
         </div>
     </div>
 </section>

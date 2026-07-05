@@ -60,10 +60,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (openItem !== item) {
                     openItem.classList.remove('is-open');
                     openItem.querySelector('.faq-answer').style.maxHeight = null;
+                    openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                 }
             });
             item.classList.toggle('is-open', !isOpen);
             answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : null;
+            question.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
         });
     });
 });

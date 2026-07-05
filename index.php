@@ -14,8 +14,8 @@ require_once __DIR__ . '/includes/header.php';
             <h1>Clear vision, <span class="accent">brought into focus</span> — for every stage of life.</h1>
             <p class="hero__lede">ASJ Eye Hospital brings specialist ophthalmology to Kyadondo Road — modern diagnostic technology, experienced eye specialists, and a treatment plan built around your eyes, not a general checklist.</p>
             <div class="hero__actions">
-                <a href="contact.php#book" class="btn btn--primary"><i class="fa-regular fa-calendar-check"></i> Book an Appointment</a>
-                <a href="services.php" class="btn btn--outline"><i class="fa-solid fa-eye"></i> Explore Services</a>
+                <a href="/contact#book" class="btn btn--primary"><i class="fa-regular fa-calendar-check"></i> Book an Appointment</a>
+                <a href="/services" class="btn btn--outline"><i class="fa-solid fa-eye"></i> Explore Services</a>
             </div>
             <div class="hero__trust">
                 <div class="hero__trust-item"><i class="fa-solid fa-user-doctor"></i> Experienced Specialists</div>
@@ -30,7 +30,7 @@ require_once __DIR__ . '/includes/header.php';
                     <circle cx="120" cy="120" r="110"></circle>
                 </svg>
                 <div class="aperture__photo">
-                    <img src="assets/img/photo-eye-macro.jpg" alt="Close-up of a human eye, representing the clarity ASJ Eye Hospital aims for in every treatment">
+                    <picture><source srcset="assets/img/photo-eye-macro.webp" type="image/webp"><img src="assets/img/photo-eye-macro.jpg" alt="Close-up of a human eye, representing the clarity ASJ Eye Hospital aims for in every treatment" width="800" height="533" loading="eager" fetchpriority="high" decoding="async"></picture>
                 </div>
                 <div class="aperture__badge">
                     <i class="fa-solid fa-circle-check"></i>
@@ -88,12 +88,12 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="service-card__icon"><i class="fa-solid <?= htmlspecialchars($s['icon']) ?>"></i></div>
                 <h3><?= htmlspecialchars($s['name']) ?></h3>
                 <p><?= htmlspecialchars($s['short']) ?></p>
-                <a href="services.php#<?= htmlspecialchars($s['slug']) ?>" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/services#<?= htmlspecialchars($s['slug']) ?>" class="service-card__link">Learn more <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-lg">
-            <a href="services.php" class="btn btn--outline">View All Services <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="/services" class="btn btn--outline">View All Services <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -104,7 +104,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="split__media">
             <span class="split__photo-accent split__photo-accent--tl" aria-hidden="true"></span>
             <div class="split__photo">
-                <img src="assets/img/photo-exam-2.jpg" alt="Eye specialist examining a patient at ASJ Eye Hospital">
+                <picture><source srcset="assets/img/photo-exam-2.webp" type="image/webp"><img src="assets/img/photo-exam-2.jpg" alt="Eye specialist examining a patient at ASJ Eye Hospital" width="800" height="533" loading="lazy" decoding="async"></picture>
             </div>
             <span class="split__photo-accent split__photo-accent--br" aria-hidden="true"></span>
         </div>
@@ -119,7 +119,7 @@ require_once __DIR__ . '/includes/header.php';
                 <li><i class="fa-solid fa-circle-check"></i> Care for children, adults and seniors</li>
             </ul>
             <div class="hero__actions" style="margin-top:30px;">
-                <a href="about.php" class="btn btn--primary">Read Our Story</a>
+                <a href="/about" class="btn btn--primary">Read Our Story</a>
             </div>
         </div>
     </div>
@@ -133,10 +133,10 @@ require_once __DIR__ . '/includes/header.php';
             <h2>A closer look at our facility.</h2>
         </div>
         <div class="gallery-grid">
-            <figure class="reveal"><img src="assets/img/photo-exam-1.jpg" alt="Diagnostic eye examination in progress"><figcaption>Diagnostic Examination</figcaption></figure>
-            <figure class="reveal"><img src="assets/img/photo-facility-1.jpg" alt="ASJ Eye Hospital facility interior"><figcaption>Our Facility</figcaption></figure>
-            <figure class="reveal"><img src="assets/img/photo-facility-2.jpg" alt="Eye care equipment at ASJ Eye Hospital"><figcaption>Modern Equipment</figcaption></figure>
-            <figure class="reveal"><img src="assets/img/photo-team.jpg" alt="ASJ Eye Hospital care team"><figcaption>Our Care Team</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-exam-1.webp" type="image/webp"><img src="assets/img/photo-exam-1.jpg" alt="Diagnostic eye examination in progress" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Diagnostic Examination</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-facility-1.webp" type="image/webp"><img src="assets/img/photo-facility-1.jpg" alt="ASJ Eye Hospital facility interior" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Facility</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-facility-2.webp" type="image/webp"><img src="assets/img/photo-facility-2.jpg" alt="Eye care equipment at ASJ Eye Hospital" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Modern Equipment</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-team.webp" type="image/webp"><img src="assets/img/photo-team.jpg" alt="ASJ Eye Hospital care team" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Care Team</figcaption></figure>
         </div>
     </div>
 </section>
@@ -150,20 +150,20 @@ require_once __DIR__ . '/includes/header.php';
         </div>
         <div class="faq">
             <div class="faq-item">
-                <button class="faq-question">Do I need an appointment, or can I walk in? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><p>We recommend booking ahead so we can match you with the right specialist, though urgent eye concerns are seen as quickly as possible — call us directly for same-day guidance.</p></div>
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">Do I need an appointment, or can I walk in? <i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                <div class="faq-answer" id="faq-answer-1"><p>We recommend booking ahead so we can match you with the right specialist, though urgent eye concerns are seen as quickly as possible — call us directly for same-day guidance.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">What should I bring to my first visit? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><p>Bring any glasses or contact lenses you currently use, a list of medications, and any previous eye reports or prescriptions if available.</p></div>
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">What should I bring to my first visit? <i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                <div class="faq-answer" id="faq-answer-2"><p>Bring any glasses or contact lenses you currently use, a list of medications, and any previous eye reports or prescriptions if available.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Do you treat children's eye conditions? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><p>Yes — our pediatric ophthalmology service covers vision screening, squint (crossed eyes) correction and lazy-eye therapy for children.</p></div>
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">Do you treat children's eye conditions? <i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                <div class="faq-answer" id="faq-answer-3"><p>Yes — our pediatric ophthalmology service covers vision screening, squint (crossed eyes) correction and lazy-eye therapy for children.</p></div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Is payment by insurance accepted? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><p>Please contact our front desk with your insurance provider's details so we can confirm coverage before your visit.</p></div>
+                <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">Is payment by insurance accepted? <i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                <div class="faq-answer" id="faq-answer-4"><p>Please contact our front desk with your insurance provider's details so we can confirm coverage before your visit.</p></div>
             </div>
         </div>
     </div>

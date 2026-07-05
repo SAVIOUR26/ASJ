@@ -13,6 +13,10 @@ $site = [
     'whatsapp'    => '256700000000',           // TODO: replace with live WhatsApp number
     'email'       => 'info@asjeyehospital.com', // TODO: replace with live email
     'address'     => '14 Kyadondo Road, Kampala, Uganda',
+    // Structured form of the address above, used for schema.org markup.
+    'address_street'  => '14 Kyadondo Road',
+    'address_city'    => 'Kampala',
+    'address_country' => 'UG',
     'hours'       => 'Mon – Sat: 8:00am – 6:00pm',
     'emergency'   => 'Emergency eye care available on call',
     'map_query'   => '14+Kyadondo+Road+Kampala+Uganda',
@@ -22,14 +26,45 @@ $site = [
         'twitter'   => '#',
         'youtube'   => '#',
     ],
+
+    // TODO: fill in once Mailcow (or another SMTP provider) is set up on the
+    // VPS. Leave 'host' empty to keep using PHP's mail() in the meantime —
+    // see includes/mailer.php.
+    'smtp' => [
+        'host'       => '',              // e.g. 'mail.asjeyehospital.com'
+        'port'       => 587,              // 587 for STARTTLS, 465 for implicit TLS
+        'encryption' => 'tls',            // 'tls' or 'ssl'
+        'username'   => '',
+        'password'   => '',
+        'from'       => '',               // defaults to $site['email'] if left blank
+    ],
+
+    // TODO: paste a real GA4 Measurement ID (e.g. 'G-XXXXXXXXXX') once the
+    // client has an analytics account, or swap the snippet in header.php for
+    // a privacy-first alternative (Plausible/Fathom). Left blank, no
+    // tracking script is loaded at all.
+    'ga4_id' => '',
+
+    // TODO: fill in once an Africa's Talking account exists, to enable SMS
+    // appointment-request confirmations and next-day reminders — see
+    // includes/notifier.php and scripts/send-appointment-reminders.php.
+    // Left blank, SMS sending is a silent no-op.
+    'sms' => [
+        'provider'  => 'africastalking',
+        'username'  => '',
+        'api_key'   => '',
+        'sender_id' => '',
+        'sandbox'   => true,
+    ],
 ];
 
 $nav = [
-    ['label' => 'Home',      'href' => 'index.php'],
-    ['label' => 'About Us',  'href' => 'about.php'],
-    ['label' => 'Services',  'href' => 'services.php'],
-    ['label' => 'Our Team',  'href' => 'doctors.php'],
-    ['label' => 'Contact',   'href' => 'contact.php'],
+    ['label' => 'Home',      'href' => '/',         'match' => 'index'],
+    ['label' => 'About Us',  'href' => '/about',    'match' => 'about'],
+    ['label' => 'Services',  'href' => '/services', 'match' => 'services'],
+    ['label' => 'Our Team',  'href' => '/doctors',  'match' => 'doctors'],
+    ['label' => 'Insights',  'href' => '/blog',     'match' => 'blog'],
+    ['label' => 'Contact',   'href' => '/contact',  'match' => 'contact'],
 ];
 
 /**
@@ -109,4 +144,8 @@ $services = [
     ],
 ];
 
-$current = basename($_SERVER['PHP_SELF']);
+// A page can set $current itself before requiring header.php (e.g.
+// blog-post.php wants the "Insights" nav item highlighted, not itself).
+if (!isset($current)) {
+    $current = basename($_SERVER['PHP_SELF'], '.php');
+}
