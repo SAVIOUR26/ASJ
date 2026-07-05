@@ -47,11 +47,11 @@ $site = [
 ];
 
 $nav = [
-    ['label' => 'Home',      'href' => 'index.php'],
-    ['label' => 'About Us',  'href' => 'about.php'],
-    ['label' => 'Services',  'href' => 'services.php'],
-    ['label' => 'Our Team',  'href' => 'doctors.php'],
-    ['label' => 'Contact',   'href' => 'contact.php'],
+    ['label' => 'Home',      'href' => '/',         'match' => 'index'],
+    ['label' => 'About Us',  'href' => '/about',    'match' => 'about'],
+    ['label' => 'Services',  'href' => '/services', 'match' => 'services'],
+    ['label' => 'Our Team',  'href' => '/doctors',  'match' => 'doctors'],
+    ['label' => 'Contact',   'href' => '/contact',  'match' => 'contact'],
 ];
 
 /**
@@ -131,4 +131,4 @@ $services = [
     ],
 ];
 
-$current = basename($_SERVER['PHP_SELF']);
+$current = basename($_SERVER['PHP_SELF'], '.php');

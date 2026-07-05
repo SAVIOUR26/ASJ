@@ -11,7 +11,7 @@
             <a href="tel:<?= htmlspecialchars($site['phone_href']) ?>" class="btn btn--light">
                 <i class="fa-solid fa-phone" aria-hidden="true"></i> <?= htmlspecialchars($site['phone']) ?>
             </a>
-            <a href="contact.php#book" class="btn btn--outline-light">
+            <a href="/contact#book" class="btn btn--outline-light">
                 <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Book Appointment
             </a>
         </div>
@@ -21,8 +21,8 @@
 <footer class="site-footer">
     <div class="container site-footer__grid">
         <div class="footer-col footer-col--brand">
-            <a href="index.php" class="brand brand--footer">
-                <img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" class="brand__logo">
+            <a href="/" class="brand brand--footer">
+                <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" width="1254" height="1254" loading="lazy" decoding="async" class="brand__logo"></picture>
                 <span class="brand__text">
                     <span class="brand__name">ASJ <em>Eye Hospital</em></span>
                 </span>
@@ -49,7 +49,7 @@
             <h3>Specialities</h3>
             <ul>
                 <?php foreach (array_slice($services, 0, 5) as $s): ?>
-                <li><a href="services.php#<?= htmlspecialchars($s['slug']) ?>"><?= htmlspecialchars($s['name']) ?></a></li>
+                <li><a href="/services#<?= htmlspecialchars($s['slug']) ?>"><?= htmlspecialchars($s['name']) ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -67,7 +67,7 @@
 
     <div class="container site-footer__bottom">
         <p>&copy; <?= date('Y') ?> <?= htmlspecialchars($site['name']) ?>. All rights reserved.</p>
-        <p class="site-footer__legal"><a href="privacy.php">Privacy Policy</a> · <a href="terms.php">Terms of Use</a></p>
+        <p class="site-footer__legal"><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Use</a></p>
         <p class="site-footer__credit">Kampala, Uganda</p>
     </div>
 </footer>

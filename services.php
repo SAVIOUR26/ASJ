@@ -6,7 +6,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="page-header">
     <div class="container">
-        <div class="breadcrumb"><a href="index.php">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Services</span></div>
+        <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Services</span></div>
         <span class="eyebrow">Our Specialities</span>
         <h1>Eye care for every condition, every age.</h1>
         <p>From routine exams to advanced surgical treatment — each service below is led by specialists focused on that specific area of the eye.</p>
@@ -21,7 +21,7 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="service-card__icon"><i class="fa-solid <?= htmlspecialchars($s['icon']) ?>"></i></div>
                 <h3><?= htmlspecialchars($s['name']) ?></h3>
                 <p><?= htmlspecialchars($s['short']) ?></p>
-                <a href="contact.php#book" class="service-card__link">Book a consultation <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="/contact#book" class="service-card__link">Book a consultation <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <?php endforeach; ?>
         </div>
@@ -36,7 +36,7 @@ require_once __DIR__ . '/includes/header.php';
             <p>If you're unsure what's affecting your vision, a full diagnostic exam is the right first step — we'll identify the issue and direct you to the specialist you need.</p>
         </div>
         <div class="text-center">
-            <a href="contact.php#book" class="btn btn--primary"><i class="fa-regular fa-calendar-check"></i> Book a Comprehensive Exam</a>
+            <a href="/contact#book" class="btn btn--primary"><i class="fa-regular fa-calendar-check"></i> Book a Comprehensive Exam</a>
         </div>
     </div>
 </section>

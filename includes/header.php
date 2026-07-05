@@ -95,8 +95,8 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
 
 <header class="site-header" id="site-header">
     <div class="container site-header__inner">
-        <a href="index.php" class="brand">
-            <img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" class="brand__logo">
+        <a href="/" class="brand">
+            <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" width="1254" height="1254" loading="eager" decoding="async" class="brand__logo"></picture>
             <span class="brand__text">
                 <span class="brand__name">ASJ <em>Eye Hospital</em></span>
                 <span class="brand__tag">Kampala</span>
@@ -107,7 +107,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
             <ul class="nav__list">
                 <?php foreach ($nav as $item): ?>
                 <li>
-                    <a href="<?= htmlspecialchars($item['href']) ?>" class="<?= $current === $item['href'] ? 'is-active' : '' ?>">
+                    <a href="<?= htmlspecialchars($item['href']) ?>" class="<?= $current === $item['match'] ? 'is-active' : '' ?>">
                         <?= htmlspecialchars($item['label']) ?>
                     </a>
                 </li>
@@ -116,7 +116,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
         </nav>
 
         <div class="site-header__actions">
-            <a href="contact.php#book" class="btn btn--primary">
+            <a href="/contact#book" class="btn btn--primary">
                 <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Book Appointment
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">

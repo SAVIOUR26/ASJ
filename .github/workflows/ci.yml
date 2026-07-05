@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Lint every PHP file
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 -P4 php -l
+
+      - name: Boot the site and smoke-test each page
+        run: |
+          php -S localhost:8000 >/tmp/php-server.log 2>&1 &
+          for i in $(seq 1 20); do
+            curl -s -o /dev/null http://localhost:8000/index.php && break
+            sleep 0.5
+          done
+
+          pages="index about services doctors contact privacy terms 404 500 maintenance"
+          fail=0
+          for page in $pages; do
+            code=$(curl -s -o /tmp/body.html -w '%{http_code}' "http://localhost:8000/${page}.php")
+            # 500.php is expected to report HTTP 500 — that's it doing its job.
+            if [ "$page" != "500" ] && { [ "$code" -ge 500 ] || [ "$code" -eq 000 ]; }; then
+              echo "::error::${page}.php returned HTTP $code"
+              fail=1
+            fi
+            if grep -qi 'Fatal error\|Uncaught Error\|Warning:.*on line' /tmp/body.html; then
+              echo "::error::${page}.php rendered a PHP error/warning"
+              cat /tmp/body.html
+              fail=1
+            fi
+          done
+
+          # robots.php / sitemap.php are served under different names in
+          # production (via .htaccess), so check them directly here.
+          for page in robots sitemap; do
+            code=$(curl -s -o /tmp/body.html -w '%{http_code}' "http://localhost:8000/${page}.php")
+            if [ "$code" -ge 400 ]; then
+              echo "::error::${page}.php returned HTTP $code"
+              fail=1
+            fi
+          done
+
+          cat /tmp/php-server.log
+          exit $fail
+
+      - name: Check for stray debug/test files
+        run: |
+          if git ls-files | grep -E '(^|/)_test_|\.DS_Store$|Thumbs\.db$'; then
+            echo "::error::Found a stray debug/test file that shouldn't be committed"
+            exit 1
+          fi

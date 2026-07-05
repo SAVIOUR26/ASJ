@@ -6,7 +6,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="page-header">
     <div class="container">
-        <div class="breadcrumb"><a href="index.php">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Terms of Use</span></div>
+        <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Terms of Use</span></div>
         <span class="eyebrow">Legal</span>
         <h1>Terms of Use</h1>
         <p>The terms that apply to using this website — separate from the clinical terms of any in-person treatment.</p>
@@ -30,7 +30,7 @@ require_once __DIR__ . '/includes/header.php';
         <p>You agree to submit accurate contact details and not to use the form to send unlawful, abusive or unsolicited commercial content. We reserve the right to disregard submissions that appear to be spam or automated.</p>
 
         <h2 style="margin-top: 40px;">4. Appointment requests</h2>
-        <p>Submitting the form is a request, not a confirmed booking — a member of our team will contact you to confirm a time. Please arrive with any relevant history (glasses, current prescriptions, prior eye reports) as noted on the <a href="contact.php">Contact page</a>.</p>
+        <p>Submitting the form is a request, not a confirmed booking — a member of our team will contact you to confirm a time. Please arrive with any relevant history (glasses, current prescriptions, prior eye reports) as noted on the <a href="/contact">Contact page</a>.</p>
 
         <h2 style="margin-top: 40px;">5. Content &amp; intellectual property</h2>
         <p>The text, photography, logo and design of this website belong to ASJ Eye Hospital unless otherwise credited, and may not be reproduced without permission.</p>

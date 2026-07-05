@@ -6,7 +6,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="page-header">
     <div class="container">
-        <div class="breadcrumb"><a href="index.php">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Privacy Policy</span></div>
+        <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Privacy Policy</span></div>
         <span class="eyebrow">Legal</span>
         <h1>Privacy Policy</h1>
         <p>How we collect, use and protect your personal data when you visit this website or get in touch with us.</p>

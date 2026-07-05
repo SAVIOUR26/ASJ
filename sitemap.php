@@ -9,14 +9,15 @@ header('Content-Type: application/xml; charset=UTF-8');
 $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 $origin = $scheme . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost');
 
+// 'file' is the on-disk script (for lastmod); 'path' is the clean public URL.
 $pages = [
-    ['path' => 'index.php',    'priority' => '1.0'],
-    ['path' => 'about.php',    'priority' => '0.8'],
-    ['path' => 'services.php', 'priority' => '0.9'],
-    ['path' => 'doctors.php',  'priority' => '0.7'],
-    ['path' => 'contact.php',  'priority' => '0.8'],
-    ['path' => 'privacy.php',  'priority' => '0.3'],
-    ['path' => 'terms.php',    'priority' => '0.3'],
+    ['file' => 'index.php',    'path' => '',         'priority' => '1.0'],
+    ['file' => 'about.php',    'path' => 'about',    'priority' => '0.8'],
+    ['file' => 'services.php', 'path' => 'services', 'priority' => '0.9'],
+    ['file' => 'doctors.php',  'path' => 'doctors',  'priority' => '0.7'],
+    ['file' => 'contact.php',  'path' => 'contact',  'priority' => '0.8'],
+    ['file' => 'privacy.php',  'path' => 'privacy',  'priority' => '0.3'],
+    ['file' => 'terms.php',    'path' => 'terms',    'priority' => '0.3'],
 ];
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
@@ -25,7 +26,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 <?php foreach ($pages as $page): ?>
     <url>
         <loc><?= htmlspecialchars($origin . '/' . $page['path']) ?></loc>
-        <lastmod><?= date('Y-m-d', filemtime(__DIR__ . '/' . $page['path'])) ?></lastmod>
+        <lastmod><?= date('Y-m-d', filemtime(__DIR__ . '/' . $page['file'])) ?></lastmod>
         <priority><?= $page['priority'] ?></priority>
     </url>
 <?php endforeach; ?>

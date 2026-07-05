@@ -2,16 +2,41 @@
 # (Nginx equivalents are documented in README.md under Deployment, since
 # an .htaccess file has no effect on an Nginx/PHP-FPM host.)
 
+DirectoryIndex index.php
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
     # Serve the dynamic robots.txt / sitemap.xml from their .php sources.
     RewriteRule ^robots\.txt$ robots.php [L]
     RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+    # Canonicalize: redirect a literal "/page.php" visit to the clean
+    # "/page" URL (whitelisted by name — contact-handler.php is a POST-only
+    # form target and must never be redirected, which would drop the data).
+    RewriteCond %{THE_REQUEST} \s/+(index|about|services|doctors|contact|privacy|terms)\.php[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,L]
+
+    # Clean URLs: map "/page" internally to "/page.php" when no matching
+    # static file/directory exists at that path.
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
 </IfModule>
 
-# Custom 404 page instead of the server default.
+# Custom error pages instead of the server defaults.
 ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# Planned-maintenance mode: uncomment this block to send every visitor to
+# maintenance.php while keeping its own assets reachable. Re-comment (or
+# delete) it to bring the site back.
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{REQUEST_URI} !^/maintenance\.php$
+#     RewriteCond %{REQUEST_URI} !^/assets/
+#     RewriteRule ^ /maintenance.php [R=503,L]
+# </IfModule>
 
 <IfModule mod_headers.c>
     # HSTS — only takes effect once the site is actually served over HTTPS.

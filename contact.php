@@ -15,7 +15,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
 
 <section class="page-header">
     <div class="container">
-        <div class="breadcrumb"><a href="index.php">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Contact</span></div>
+        <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Contact</span></div>
         <span class="eyebrow">Get In Touch</span>
         <h1>Book an appointment or ask us a question.</h1>
         <p>Reach us by phone, WhatsApp or the form below — our team responds during opening hours.</p>
