@@ -3,9 +3,13 @@
  * Contact / appointment form handler.
  * Validates input, blocks obvious spam, and emails the enquiry to the hospital.
  * Update $site['email'] in includes/config.php with the real inbox before going live,
- * and make sure the server's mail() function (or an SMTP-based mailer) is configured.
+ * and fill in $site['smtp'] (see includes/mailer.php) once Mailcow is configured.
  */
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/mailer.php';
 
 function redirect_with_status($status) {
     header('Location: contact.php?status=' . $status . '#book');
@@ -13,6 +17,12 @@ function redirect_with_status($status) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect_with_status('invalid');
+}
+
+// CSRF check — the token is minted per-session in contact.php.
+$submittedToken = $_POST['csrf_token'] ?? '';
+if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $submittedToken)) {
     redirect_with_status('invalid');
 }
 
@@ -50,11 +60,9 @@ $body .= "Email: " . ($email !== '' ? $email : 'Not provided') . "\n";
 $body .= "Service: " . ($service !== '' ? $service : 'Not specified') . "\n\n";
 $body .= "Message:\n{$message}\n";
 
-$headers = "From: " . $site['name'] . " Website <no-reply@" . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ">\r\n";
-if ($email !== '') {
-    $headers .= "Reply-To: {$email}\r\n";
-}
+$sent = send_site_mail($site, $to, $subject, $body, $email !== '' ? $email : null);
 
-$sent = @mail($to, $subject, $body, $headers);
+// One-time token — mint a fresh one so a replayed POST can't resubmit.
+unset($_SESSION['csrf_token']);
 
 redirect_with_status($sent ? 'success' : 'error');

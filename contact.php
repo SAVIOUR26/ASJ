@@ -1,4 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $page_title = 'Contact & Book an Appointment';
 $page_desc  = 'Get in touch with ASJ Eye Hospital in Kampala or book an appointment with one of our eye specialists.';
 require_once __DIR__ . '/includes/header.php';
@@ -102,6 +109,8 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" required placeholder="Tell us about your concern or preferred appointment time..."></textarea>
                 </div>
+
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
                 <!-- Honeypot spam trap — kept hidden from real visitors -->
                 <div class="field full" style="position:absolute; left:-9999px;" aria-hidden="true">

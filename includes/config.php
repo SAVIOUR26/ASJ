@@ -22,6 +22,24 @@ $site = [
         'twitter'   => '#',
         'youtube'   => '#',
     ],
+
+    // TODO: fill in once Mailcow (or another SMTP provider) is set up on the
+    // VPS. Leave 'host' empty to keep using PHP's mail() in the meantime —
+    // see includes/mailer.php.
+    'smtp' => [
+        'host'       => '',              // e.g. 'mail.asjeyehospital.com'
+        'port'       => 587,              // 587 for STARTTLS, 465 for implicit TLS
+        'encryption' => 'tls',            // 'tls' or 'ssl'
+        'username'   => '',
+        'password'   => '',
+        'from'       => '',               // defaults to $site['email'] if left blank
+    ],
+
+    // TODO: paste a real GA4 Measurement ID (e.g. 'G-XXXXXXXXXX') once the
+    // client has an analytics account, or swap the snippet in header.php for
+    // a privacy-first alternative (Plausible/Fathom). Left blank, no
+    // tracking script is loaded at all.
+    'ga4_id' => '',
 ];
 
 $nav = [
