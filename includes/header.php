@@ -55,7 +55,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
     'name'     => $site['name'],
     'url'      => $origin . '/',
     'image'    => $page_image_url,
-    'telephone'=> $site['phone'],
+    'telephone'=> $site['phone_href'],
     'email'    => $site['email'],
     'address'  => [
         '@type'           => 'PostalAddress',
@@ -89,7 +89,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
         <div class="topbar__item topbar__item--right">
             <a href="tel:<?= htmlspecialchars($site['phone_href']) ?>"><i class="fa-solid fa-phone" aria-hidden="true"></i> <?= htmlspecialchars($site['phone']) ?></a>
             <span class="topbar__divider" aria-hidden="true">|</span>
-            <span><i class="fa-regular fa-clock" aria-hidden="true"></i> <?= htmlspecialchars($site['hours']) ?></span>
+            <span><i class="fa-regular fa-clock" aria-hidden="true"></i> <?= htmlspecialchars($site['hours_short']) ?></span>
             <span class="topbar__divider" aria-hidden="true">|</span>
             <span class="lang-switch">
                 <a href="?lang=en" class="<?= $locale === 'en' ? 'is-active' : '' ?>" aria-current="<?= $locale === 'en' ? 'true' : 'false' ?>">EN</a>

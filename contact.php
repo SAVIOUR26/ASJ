@@ -58,14 +58,19 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
                 <i class="fa-regular fa-clock"></i>
                 <div>
                     <h3>Opening Hours</h3>
-                    <p><?= htmlspecialchars($site['hours']) ?></p>
+                    <?php foreach ($site['hours'] as $row): ?>
+                    <p><?= htmlspecialchars($row['days']) ?>: <?= htmlspecialchars($row['time']) ?></p>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="contact-info-item">
                 <i class="fa-solid fa-truck-medical"></i>
                 <div>
                     <h3>Urgent Concern?</h3>
-                    <p><?= htmlspecialchars($site['emergency']) ?> — call us directly.</p>
+                    <p><?= htmlspecialchars($site['emergency']) ?>:</p>
+                    <?php foreach ($site['emergency_phones'] as $ep): ?>
+                    <p><a href="tel:<?= htmlspecialchars($ep['href']) ?>"><?= htmlspecialchars($ep['display']) ?></a></p>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -114,7 +119,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
                     <select id="appt_time" name="appt_time">
                         <option value="">Select a time</option>
                         <?php
-                        for ($minutes = 8 * 60; $minutes <= 17 * 60 + 30; $minutes += 30) {
+                        for ($minutes = 9 * 60; $minutes <= 17 * 60; $minutes += 30) {
                             $slot = sprintf('%02d:%02d', intdiv($minutes, 60), $minutes % 60);
                             echo '<option value="' . htmlspecialchars($slot) . '">' . htmlspecialchars(date('g:i A', mktime(0, $minutes))) . "</option>\n";
                         }
@@ -125,7 +130,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" required placeholder="Tell us about your concern or preferred appointment time..."></textarea>
                 </div>
-                <p class="form-note full" style="margin-top:-8px;">Preferred date/time is a request, not a confirmed booking — our <?= htmlspecialchars($site['hours']) ?> team will call or email to confirm.</p>
+                <p class="form-note full" style="margin-top:-8px;">Preferred date/time is a request, not a confirmed booking — our team will call or email during opening hours to confirm.</p>
 
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 

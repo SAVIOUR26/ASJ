@@ -19,7 +19,7 @@ Owner key: **Client** (content/business info only) · **Dev** · **Client + Dev*
 
 | # | Task | Status | Ref |
 |---|------|--------|-----|
-| 1 | Swap placeholder contact details for the real ones | ⏳ **Blocked on client** — phone/WhatsApp/email in config.php are still `TODO` placeholders; no one but ASJ can supply the real ones | `includes/config.php` |
+| 1 | Swap placeholder contact details for the real ones | ✅ **Shipped** — real landline, WhatsApp, emergency numbers and structured Mon–Fri/Sat/Sun hours are live, with day-aware validation on the booking form to match | `includes/config.php` |
 | 2 | Replace the three placeholder specialist profiles | ⏳ **Blocked on client** — needs real names/quals/photos/bios before `doctors.php` can drop them in | `doctors.php` |
 | 3 | Move the contact form off PHP `mail()` | ✅ **Shipped** — hand-rolled SMTP client (no Composer), falls back to `mail()` until `$site['smtp']` is filled in | `includes/mailer.php` |
 | 4 | Add CSRF protection to the enquiry form | ✅ **Shipped** — per-session token, verified end-to-end against a live SMTP handshake | `contact.php`, `contact-handler.php` |
@@ -57,5 +57,5 @@ Owner key: **Client** (content/business info only) · **Dev** · **Client + Dev*
 ## At a glance
 
 - **19/19** items have a real, tested code change behind them — nothing left as a bare TODO comment
-- **6** items are still blocked, and every one of them needs something only ASJ (or a native Luganda reviewer) can provide: real contact details, real doctor bios, more photography, a live-domain map check, legal sign-off on the drafted policies, and SMS/analytics account credentials
+- **5** items are still blocked, and every one of them needs something only ASJ (or a native Luganda reviewer) can provide: real doctor bios, more photography, a live-domain map check, legal sign-off on the drafted policies, and SMS/analytics account credentials
 - Everything shipped was exercised directly, not just written: SMTP over a real socket handshake, CSRF replay/rejection, the full clean-URL route table, WCAG contrast math, the booking flow's SQLite write + `.ics` email attachment, and the CI script's own exit code
