@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/header.php';
 <section class="page-header">
     <div class="container">
         <div class="breadcrumb"><a href="/">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Our Team</span></div>
-        <span class="eyebrow">Meet The Team</span>
+        <span class="eyebrow">Meet the Experts</span>
         <h1>Specialists focused on one thing — your eyes.</h1>
         <p>Every member of our clinical team works in ophthalmology exclusively, so your care is always led by someone who specializes in exactly what you need.</p>
     </div>

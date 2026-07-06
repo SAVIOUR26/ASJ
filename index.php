@@ -11,7 +11,7 @@ require_once __DIR__ . '/includes/header.php';
             <div class="hero__eyebrow-row">
                 <span class="eyebrow">Specialist Eye Hospital · Kampala</span>
             </div>
-            <h1>Clear vision, <span class="accent">brought into focus</span> — for every stage of life.</h1>
+            <h1>Clear vision, <span class="accent">better life</span> — for every stage of life.</h1>
             <p class="hero__lede">ASJ Eye Hospital brings specialist ophthalmology to Kyadondo Road — modern diagnostic technology, experienced eye specialists, and a treatment plan built around your eyes, not a general checklist.</p>
             <div class="hero__actions">
                 <a href="/contact#book" class="btn btn--primary"><i class="fa-regular fa-calendar-check"></i> Book an Appointment</a>
@@ -29,8 +29,8 @@ require_once __DIR__ . '/includes/header.php';
                     <circle class="ring--sky" cx="120" cy="120" r="100"></circle>
                     <circle cx="120" cy="120" r="110"></circle>
                 </svg>
-                <div class="aperture__photo">
-                    <picture><source srcset="assets/img/photo-eye-macro.webp" type="image/webp"><img src="assets/img/photo-eye-macro.jpg" alt="Close-up of a human eye, representing the clarity ASJ Eye Hospital aims for in every treatment" width="800" height="533" loading="eager" fetchpriority="high" decoding="async"></picture>
+                <div class="aperture__photo aperture__photo--logo">
+                    <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="ASJ Eye Hospital — Clear Vision, Better Life" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async"></picture>
                 </div>
                 <div class="aperture__badge">
                     <i class="fa-solid fa-circle-check"></i>

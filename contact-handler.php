@@ -66,7 +66,11 @@ if ($apptDate !== '') {
         }
         [$hour, $minute] = array_map('intval', explode(':', $apptTime));
         $minutesSinceMidnight = $hour * 60 + $minute;
-        if ($minutesSinceMidnight < 8 * 60 || $minutesSinceMidnight > 17 * 60 + 30) {
+        // Mon–Fri 9:00–5:00pm, Sat 9:00–4:00pm — matches $site['hours'].
+        $isSaturday = $parsedDate->format('N') === '6';
+        $openMinutes = 9 * 60;
+        $closeMinutes = $isSaturday ? 16 * 60 : 17 * 60;
+        if ($minutesSinceMidnight < $openMinutes || $minutesSinceMidnight > $closeMinutes) {
             redirect_with_status('invalid');
         }
         $apptDateTime = $parsedDate->setTime($hour, $minute);

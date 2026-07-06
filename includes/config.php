@@ -7,18 +7,33 @@
 
 $site = [
     'name'        => 'ASJ Eye Hospital',
-    'tagline'     => 'Kampala’s home for clear, confident vision',
-    'phone'       => '+256 700 000 000',      // TODO: replace with live number
-    'phone_href'  => '+256700000000',
-    'whatsapp'    => '256700000000',           // TODO: replace with live WhatsApp number
-    'email'       => 'info@asjeyehospital.com', // TODO: replace with live email
+    'tagline'     => 'Clear Vision, Better Life',
+    'phone'       => '0750 000 777',
+    'phone_href'  => '+256750000777',
+    'whatsapp'    => '256703429370',
+    'email'       => 'info@asjeyehospital.com',
     'address'     => '14 Kyadondo Road, Kampala, Uganda',
     // Structured form of the address above, used for schema.org markup.
     'address_street'  => '14 Kyadondo Road',
     'address_city'    => 'Kampala',
     'address_country' => 'UG',
-    'hours'       => 'Mon – Sat: 8:00am – 6:00pm',
-    'emergency'   => 'Emergency eye care available on call',
+
+    // Structured opening hours — 'hours_short' is the compact form used in
+    // the topbar; 'hours' is the full breakdown for the footer/contact page.
+    'hours_short' => 'Mon – Fri: 9:00am – 5:00pm',
+    'hours' => [
+        ['days' => 'Mon – Fri', 'time' => '9:00am – 5:00pm'],
+        ['days' => 'Sat',       'time' => '9:00am – 4:00pm'],
+        ['days' => 'Sun',       'time' => 'Closed'],
+    ],
+
+    'emergency' => 'Emergency care available 24/7',
+    // Both numbers the client gave for urgent/after-hours contact.
+    'emergency_phones' => [
+        ['display' => '0755 654 588', 'href' => '+256755654588'],
+        ['display' => '0703 429 370', 'href' => '+256703429370'],
+    ],
+
     'map_query'   => '14+Kyadondo+Road+Kampala+Uganda',
     'social' => [
         'facebook'  => '#',

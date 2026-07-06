@@ -60,7 +60,10 @@
                 <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <?= htmlspecialchars($site['address']) ?></li>
                 <li><i class="fa-solid fa-phone" aria-hidden="true"></i> <a href="tel:<?= htmlspecialchars($site['phone_href']) ?>"><?= htmlspecialchars($site['phone']) ?></a></li>
                 <li><i class="fa-regular fa-envelope" aria-hidden="true"></i> <a href="mailto:<?= htmlspecialchars($site['email']) ?>"><?= htmlspecialchars($site['email']) ?></a></li>
-                <li><i class="fa-regular fa-clock" aria-hidden="true"></i> <?= htmlspecialchars($site['hours']) ?></li>
+                <?php foreach ($site['hours'] as $row): ?>
+                <li><i class="fa-regular fa-clock" aria-hidden="true"></i> <?= htmlspecialchars($row['days']) ?>: <?= htmlspecialchars($row['time']) ?></li>
+                <?php endforeach; ?>
+                <li><i class="fa-solid fa-truck-medical" aria-hidden="true"></i> <?= htmlspecialchars($site['emergency']) ?></li>
             </ul>
         </div>
     </div>
