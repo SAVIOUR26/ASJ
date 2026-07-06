@@ -127,8 +127,8 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
         </nav>
 
         <div class="site-header__actions">
-            <a href="/contact#book" class="btn btn--primary">
-                <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> <?= htmlspecialchars(t('book_appointment')) ?>
+            <a href="/contact#book" class="btn btn--primary" aria-label="<?= htmlspecialchars(t('book_appointment')) ?>">
+                <i class="fa-regular fa-calendar-check" aria-hidden="true"></i> <span><?= htmlspecialchars(t('book_appointment')) ?></span>
             </a>
             <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
