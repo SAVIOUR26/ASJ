@@ -30,7 +30,7 @@ require_once __DIR__ . '/includes/header.php';
                     <circle cx="120" cy="120" r="110"></circle>
                 </svg>
                 <div class="aperture__photo aperture__photo--logo">
-                    <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="ASJ Eye Hospital — Clear Vision, Better Life" width="1254" height="1254" loading="eager" fetchpriority="high" decoding="async"></picture>
+                    <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="ASJ Eye Hospital — Meet the Experts" width="1024" height="1024" loading="eager" fetchpriority="high" decoding="async"></picture>
                 </div>
                 <div class="aperture__badge">
                     <i class="fa-solid fa-circle-check"></i>
