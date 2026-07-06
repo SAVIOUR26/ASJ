@@ -9,7 +9,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container hero__inner">
         <div class="hero__copy">
             <div class="hero__eyebrow-row">
-                <span class="eyebrow">Specialist Eye Hospital · Kampala</span>
+                <span class="eyebrow">Meet the Experts</span>
             </div>
             <h1>Clear vision, <span class="accent">better life</span> — for every stage of life.</h1>
             <p class="hero__lede">ASJ Eye Hospital brings specialist ophthalmology to Kyadondo Road — modern diagnostic technology, experienced eye specialists, and a treatment plan built around your eyes, not a general checklist.</p>
