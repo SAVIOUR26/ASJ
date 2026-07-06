@@ -1,0 +1,51 @@
+name: Deploy (FTP)
+
+# Ships the site to the asj.thirdsan.com showcase subdomain over FTP/FTPS.
+#
+# Required repo Secrets (Settings > Secrets and variables > Actions > Secrets):
+#   FTP_SERVER    - FTP host, e.g. ftp.thirdsan.com
+#   FTP_USERNAME  - FTP account username
+#   FTP_PASSWORD  - FTP account password
+#
+# Required repo Variable (same page, "Variables" tab - not secret, just config):
+#   FTP_SERVER_DIR - remote path the subdomain serves from, e.g.
+#                    /public_html/asj/  or  /asj.thirdsan.com/
+#                    (check the hosting control panel for the exact path
+#                    used when the asj.thirdsan.com subdomain was created)
+#
+# If the FTP account only supports plain FTP (no TLS), change `protocol:
+# ftps` to `protocol: ftp` below - everything else stays the same.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ftp
+  cancel-in-progress: true
+
+jobs:
+  ftp-deploy:
+    name: Deploy to asj.thirdsan.com
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy over FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ vars.FTP_SERVER_DIR }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/data/**
+            README.md
+            ROADMAP.md
