@@ -156,7 +156,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : null;
                 src="https://www.google.com/maps?q=<?= urlencode($site['address']) ?>&output=embed"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-                title="Map to ASJ Eye Hospital, 14 Kyadondo Road, Kampala">
+                title="Map to <?= htmlspecialchars($site['name'] . ', ' . $site['address']) ?>">
             </iframe>
         </div>
     </div>
