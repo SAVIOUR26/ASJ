@@ -12,9 +12,9 @@ $site = [
     'phone_href'  => '+256750000777',
     'whatsapp'    => '256703429370',
     'email'       => 'info@asjeyehospital.com',
-    'address'     => '14 Kyadondo Road, Opp. Indian High Commission and NRM Secretariat, Kampala, Uganda',
+    'address'     => '14 Kyadondo Road, Opposite Indian High Commission and NRM Office, Kampala, Uganda',
     // Structured form of the address above, used for schema.org markup.
-    'address_street'  => '14 Kyadondo Road, Opp. Indian High Commission and NRM Secretariat',
+    'address_street'  => '14 Kyadondo Road, Opposite Indian High Commission and NRM Office',
     'address_city'    => 'Kampala',
     'address_country' => 'UG',
 
@@ -34,7 +34,7 @@ $site = [
         ['display' => '0703 429 370', 'href' => '+256703429370'],
     ],
 
-    'map_query'   => '14+Kyadondo+Road+Opp+Indian+High+Commission+Kampala+Uganda',
+    'map_query'   => '14+Kyadondo+Road+Opposite+Indian+High+Commission+Kampala+Uganda',
     'social' => [
         'facebook'  => '#',
         'instagram' => '#',
