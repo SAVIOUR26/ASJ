@@ -22,7 +22,7 @@
     <div class="container site-footer__grid">
         <div class="footer-col footer-col--brand">
             <a href="/" class="brand brand--footer">
-                <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" width="1254" height="1254" loading="lazy" decoding="async" class="brand__logo"></picture>
+                <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" width="1024" height="1024" loading="lazy" decoding="async" class="brand__logo"></picture>
                 <span class="brand__text">
                     <span class="brand__name">ASJ <em>Eye Hospital</em></span>
                 </span>

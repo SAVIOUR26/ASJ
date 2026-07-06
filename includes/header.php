@@ -107,7 +107,7 @@ $social_links = array_filter($site['social'], fn($url) => $url !== '' && $url !=
 <header class="site-header" id="site-header">
     <div class="container site-header__inner">
         <a href="/" class="brand">
-            <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" width="1254" height="1254" loading="eager" decoding="async" class="brand__logo"></picture>
+            <picture><source srcset="assets/img/logo.webp" type="image/webp"><img src="assets/img/logo.jpg" alt="<?= htmlspecialchars($site['name']) ?> logo" width="1024" height="1024" loading="eager" decoding="async" class="brand__logo"></picture>
             <span class="brand__text">
                 <span class="brand__name">ASJ <em>Eye Hospital</em></span>
                 <span class="brand__tag">Kampala</span>
