@@ -36,7 +36,24 @@
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    /* The mobile off-canvas nav sits off-screen via `transform:
+       translateX(100%)` on a fixed element — transforms count toward the
+       scrollable overflow region even when the element is invisible, which
+       otherwise lets the whole page scroll sideways enough to shift every
+       other (in-flow) element left along with it (confirmed with
+       Playwright: without this, window.scrollBy(500, 0) actually moves the
+       page on every route).
+       This goes on <html> only, not <body>: putting it on body as well
+       breaks `.site-header`'s `position: sticky` (confirmed — the header
+       stopped sticking with both set). html-only stops real horizontal
+       scrolling and leaves sticky working; `document.documentElement.
+       scrollWidth` still misreports the old doubled value as a browser
+       quirk, but `scrollX` genuinely cannot move past 0 — that's what
+       actually matters for the user. */
+    overflow-x: hidden;
+}
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -137,6 +154,13 @@ p { color: var(--text-soft); }
     backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
     transition: box-shadow .25s ease;
 }
+
+/* Anchor-link targets (the "Book Appointment" section, service cards) sit
+   right under the sticky header unless given breathing room — otherwise
+   jumping to #book or #<service-slug> lands the heading half-hidden behind
+   it. 100px comfortably clears the header at every width we've measured
+   (~77-89px) plus a little air. */
+#book, .service-card { scroll-margin-top: 100px; }
 .site-header.is-scrolled { box-shadow: var(--shadow-sm); }
 .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 14px; }
 
@@ -442,8 +466,16 @@ p { color: var(--text-soft); }
 
 @media (max-width: 880px) {
     .topbar__item:first-child { display: none; }
-    .nav { position: fixed; inset: 74px 0 0 0; background: #fff; padding: 20px 24px; transform: translateX(100%);
-        visibility: hidden; transition: transform .3s ease, visibility 0s linear .3s; overflow-y: auto; z-index: 99; }
+    .nav {
+        /* Explicit height, not inset's implicit top+bottom sizing: measured
+           in Chromium 141 that `inset: 74px 0 0 0` on a fixed element here
+           resolves to a ~40px box instead of filling to the viewport
+           bottom — a real, reproducible engine quirk, not a stale-browser
+           artifact. calc() sidesteps it entirely. */
+        position: fixed; top: 74px; right: 0; left: 0; height: calc(100vh - 74px);
+        background: #fff; padding: 20px 24px; transform: translateX(100%);
+        visibility: hidden; transition: transform .3s ease, visibility 0s linear .3s; overflow-y: auto; z-index: 99;
+    }
     /* visibility (not just the transform) keeps the closed-off-canvas menu's
        links out of tab order — otherwise they stay focusable while invisible. */
     .nav.is-open { transform: translateX(0); visibility: visible; transition: transform .3s ease; }
