@@ -18,7 +18,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="split__media">
             <span class="split__photo-accent split__photo-accent--tl" aria-hidden="true"></span>
             <div class="split__photo">
-                <picture><source srcset="assets/img/photo-facility-1.webp" type="image/webp"><img src="assets/img/photo-facility-1.jpg" alt="ASJ Eye Hospital reception and facility" width="800" height="533" loading="lazy" decoding="async"></picture>
+                <picture><source srcset="assets/img/photo-exterior.webp" type="image/webp"><img src="assets/img/photo-exterior.jpg" alt="ASJ Eye Hospital building exterior, 14 Kyadondo Road" width="800" height="533" loading="lazy" decoding="async"></picture>
             </div>
             <span class="split__photo-accent split__photo-accent--br" aria-hidden="true"></span>
         </div>
@@ -94,7 +94,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="gallery-grid">
             <figure class="reveal"><picture><source srcset="assets/img/photo-facility-2.webp" type="image/webp"><img src="assets/img/photo-facility-2.jpg" alt="ASJ Eye Hospital equipment" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Diagnostic Equipment</figcaption></figure>
             <figure class="reveal"><picture><source srcset="assets/img/photo-team.webp" type="image/webp"><img src="assets/img/photo-team.jpg" alt="ASJ Eye Hospital care team" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Care Team</figcaption></figure>
-            <figure class="reveal"><picture><source srcset="assets/img/photo-exam-2.webp" type="image/webp"><img src="assets/img/photo-exam-2.jpg" alt="Consultation in progress" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Consultation Room</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-waiting-room.webp" type="image/webp"><img src="assets/img/photo-waiting-room.jpg" alt="ASJ Eye Hospital waiting area" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Waiting Area</figcaption></figure>
             <figure class="reveal"><picture><source srcset="assets/img/photo-eye-macro.webp" type="image/webp"><img src="assets/img/photo-eye-macro.jpg" alt="Close-up of a human eye" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Focused on Vision</figcaption></figure>
         </div>
     </div>

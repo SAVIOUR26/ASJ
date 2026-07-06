@@ -20,7 +20,7 @@ Owner key: **Client** (content/business info only) · **Dev** · **Client + Dev*
 | # | Task | Status | Ref |
 |---|------|--------|-----|
 | 1 | Swap placeholder contact details for the real ones | ✅ **Shipped** — real landline, WhatsApp, emergency numbers and structured Mon–Fri/Sat/Sun hours are live, with day-aware validation on the booking form to match | `includes/config.php` |
-| 2 | Replace the three placeholder specialist profiles | ⏳ **Blocked on client** — needs real names/quals/photos/bios before `doctors.php` can drop them in | `doctors.php` |
+| 2 | Replace the three placeholder specialist profiles | 🟡 **1 of 3 done** — Dr. Rehan Khan's real profile (MBBS, MD AIIMS New Delhi) is live; the other two are still placeholders pending real names/quals/photos/bios | `doctors.php` |
 | 3 | Move the contact form off PHP `mail()` | ✅ **Shipped** — hand-rolled SMTP client (no Composer), falls back to `mail()` until `$site['smtp']` is filled in | `includes/mailer.php` |
 | 4 | Add CSRF protection to the enquiry form | ✅ **Shipped** — per-session token, verified end-to-end against a live SMTP handshake | `contact.php`, `contact-handler.php` |
 | 5 | Verify the live map pin | ⏳ **Blocked on deploy** — still can't reach google.com from this sandbox; needs a live check once on a real domain | `contact.php` |
@@ -33,7 +33,7 @@ Owner key: **Client** (content/business info only) · **Dev** · **Client + Dev*
 | 7 | Wire up analytics | ✅ **Scaffolded** — GA4 snippet loads only once `$site['ga4_id']` is set; ⏳ blocked on client's analytics account | `includes/header.php` |
 | 8 | Draft Privacy Policy & Terms pages | ✅ **Drafted** — grounded in Uganda's Data Protection and Privacy Act 2019; ⏳ still needs ASJ's own legal sign-off before launch | `privacy.php`, `terms.php` |
 | 9 | Set security headers at the server | ✅ **Shipped** (Apache) — HSTS/CSP/X-Frame-Options/Referrer-Policy/Permissions-Policy in `.htaccess`; ⏳ Nginx hosts need the documented equivalent applied at the vhost | `.htaccess` |
-| 10 | Commission more facility photography | ⏳ **Blocked on client** — only 6 unique photos exist; no amount of engineering substitutes for real photos | `assets/img/` |
+| 10 | Commission more facility photography | 🟡 **Building exterior + waiting area received and live** (homepage, about page); OT/surgical theatre and additional consultation rooms still welcome | `assets/img/` |
 
 ## Phase 2 — Polish
 
@@ -57,5 +57,5 @@ Owner key: **Client** (content/business info only) · **Dev** · **Client + Dev*
 ## At a glance
 
 - **19/19** items have a real, tested code change behind them — nothing left as a bare TODO comment
-- **5** items are still blocked, and every one of them needs something only ASJ (or a native Luganda reviewer) can provide: real doctor bios, more photography, a live-domain map check, legal sign-off on the drafted policies, and SMS/analytics account credentials
+- **5** items are still open (2 partially done), and every one of them needs something only ASJ (or a native Luganda reviewer) can provide: the remaining two doctor bios, more photography (OT, extra consultation rooms), a live-domain map check, legal sign-off on the drafted policies, and SMS/analytics account credentials
 - Everything shipped was exercised directly, not just written: SMTP over a real socket handshake, CSRF replay/rejection, the full clean-URL route table, WCAG contrast math, the booking flow's SQLite write + `.ics` email attachment, and the CI script's own exit code

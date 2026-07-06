@@ -16,16 +16,17 @@ require_once __DIR__ . '/includes/header.php';
 <section class="section">
     <div class="container">
         <!--
-            TODO for ASJ Eye Hospital: replace the placeholder roles, photos and
-            bios below with your actual specialists' names, qualifications and headshots.
+            TODO for ASJ Eye Hospital: the first card below is Dr. Rehan Khan's
+            real profile. The remaining two are still placeholders — replace
+            with real names, qualifications, photos and bios when ready.
         -->
         <div class="doctor-grid">
             <div class="doctor-card reveal">
-                <div class="doctor-card__photo"><picture><source srcset="assets/img/photo-team.webp" type="image/webp"><img src="assets/img/photo-team.jpg" alt="Placeholder photo for Lead Ophthalmologist — replace with real staff photo" width="800" height="533" loading="lazy" decoding="async"></picture></div>
+                <div class="doctor-card__photo"><picture><source srcset="assets/img/doctor-rehan-khan.webp" type="image/webp"><img src="assets/img/doctor-rehan-khan.jpg" alt="Dr. Rehan Khan, ophthalmologist at ASJ Eye Hospital" width="380" height="380" loading="lazy" decoding="async"></picture></div>
                 <div class="doctor-card__body">
-                    <h3>Lead Ophthalmologist</h3>
-                    <span class="doctor-card__role">Cataract &amp; Refractive Surgery</span>
-                    <p>Placeholder profile — add name, qualifications and years of experience.</p>
+                    <h3>Dr. Rehan Khan</h3>
+                    <span class="doctor-card__role">Cataract, Cornea &amp; Refractive Surgery</span>
+                    <p>MBBS, MD (AIIMS, New Delhi). Specializes in Phaco cataract surgery, corneal treatment and refractive procedures including Q-LASIK, ICL &amp; Bioptics, alongside neuro-ophthalmology.</p>
                 </div>
             </div>
             <div class="doctor-card reveal">
@@ -46,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
         </div>
 
-        <p class="doctor-note"><i class="fa-solid fa-circle-info"></i> These are placeholder profiles. Send over your specialists' real names, qualifications, photos and short bios and we'll drop them straight in before launch.</p>
+        <p class="doctor-note"><i class="fa-solid fa-circle-info"></i> The remaining two profiles are still placeholders. Send over their real names, qualifications, photos and short bios and we'll drop them straight in before launch.</p>
     </div>
 </section>
 

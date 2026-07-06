@@ -134,7 +134,7 @@ require_once __DIR__ . '/includes/header.php';
         </div>
         <div class="gallery-grid">
             <figure class="reveal"><picture><source srcset="assets/img/photo-exam-1.webp" type="image/webp"><img src="assets/img/photo-exam-1.jpg" alt="Diagnostic eye examination in progress" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Diagnostic Examination</figcaption></figure>
-            <figure class="reveal"><picture><source srcset="assets/img/photo-facility-1.webp" type="image/webp"><img src="assets/img/photo-facility-1.jpg" alt="ASJ Eye Hospital facility interior" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Facility</figcaption></figure>
+            <figure class="reveal"><picture><source srcset="assets/img/photo-exterior.webp" type="image/webp"><img src="assets/img/photo-exterior.jpg" alt="ASJ Eye Hospital building exterior" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Facility</figcaption></figure>
             <figure class="reveal"><picture><source srcset="assets/img/photo-facility-2.webp" type="image/webp"><img src="assets/img/photo-facility-2.jpg" alt="Eye care equipment at ASJ Eye Hospital" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Modern Equipment</figcaption></figure>
             <figure class="reveal"><picture><source srcset="assets/img/photo-team.webp" type="image/webp"><img src="assets/img/photo-team.jpg" alt="ASJ Eye Hospital care team" width="800" height="533" loading="lazy" decoding="async"></picture><figcaption>Our Care Team</figcaption></figure>
         </div>
